@@ -19,4 +19,10 @@
 
   # Printing
   services.printing.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    # KDE/desktop utilities
+    kdePackages.bluedevil
+    maliit-keyboard
+  ];
 }

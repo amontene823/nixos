@@ -19,7 +19,6 @@
           inherit system;
           modules = [
             ./modules/common.nix
-            ./modules/desktop-kde.nix
             ./modules/packages.nix
             ./modules/user-angelo.nix
 

@@ -27,16 +27,6 @@
   # Networking
   networking.networkmanager.enable = true;
 
-  # direnv + nix-direnv
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  # Fonts
-  fonts.packages = with pkgs; [
-    fira-code
-    cantarell-fonts
-  ];
-
   # Bluetooth
   hardware.bluetooth = {
     enable = true;

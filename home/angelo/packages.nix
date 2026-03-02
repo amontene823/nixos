@@ -1,23 +1,44 @@
 { pkgs, ... }:
 
 {
+  # User-scoped pacckages
   home.packages = with pkgs; [
-    # CLI basics
-    wget
-    curl
-    htop
+    # CLI tools
     rclone
     unzip
     tree
-    wl-clipboard
+    ispell
 
-    # dev tools (user-scoped)
+    # dev tools
     gh
     uv
     python3
 
-    # editors (optional: keep in NixOS if you want them system-wide)
-    # vim-full
-    # emacs
+    # STM32
+    stm32cubemx
+    stm32flash
+
+    # CAD
+    kicad
+    openscad
+    freecad
+    turbocase
+    easyeda2kicad
+
+    # Editors
+    emacs
+    vscode
+
+    # Fonts
+    fira-code
+    cantarell-fonts
+
+    # Gaming / emulation
+    retroarch-full
+    dolphin-emu
+
   ];
+
+
+  fonts.fontconfig.enable = true;
 }
