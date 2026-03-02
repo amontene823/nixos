@@ -10,7 +10,6 @@
     htop
     wl-clipboard
 
-
     # Editors/GUI
     vim-full
 

@@ -24,12 +24,15 @@
         lg = "log --oneline --decorate --graph --all";
       };
 
-      # Line ending policy for Linux
       core = {
         autocrlf = "input";
         eol = "lf";
         safecrlf = "warn";
       };
+
+      # GitHub CLI credential helper for HTTPS (Magit uses git → this fixes auth)
+      "credential \"https://github.com\"".helper = "!gh auth git-credential";
+      "credential \"https://gist.github.com\"".helper = "!gh auth git-credential";
     };
   };
 }

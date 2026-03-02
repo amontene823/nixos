@@ -8,6 +8,8 @@
     unzip
     tree
     ispell
+    ripgrep
+    fd
 
     # dev tools
     gh
