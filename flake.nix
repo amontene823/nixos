@@ -8,17 +8,27 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # WSL integration
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      lib = nixpkgs.lib;
+  outputs = { self, nixpkgs, home-manager, nixos-wsl, ... }:
+  let
+    lib = nixpkgs.lib;
 
-      mkHost = { system, hostName }:
-        lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./modules/common.nix
+    mkHost =
+      { system
+      , hostName
+      , extraModules ? [ ]
+      , hasHardware ? true
+      , enableDesktop ? false
+      }:
+      lib.nixosSystem {
+        inherit system;
+        modules =
+          [
+            ./modules/base.nix
             ./modules/packages.nix
             ./modules/user-angelo.nix
 
@@ -30,15 +40,37 @@
               home-manager.users.angelo = import ./home/angelo;
             }
 
-            # Host-specific bits (hostname + hardware)
+            # Host-specific bits
             ./hosts/${hostName}/configuration.nix
+          ]
+          ++ lib.optionals enableDesktop [
+            ./modules/desktop.nix
+          ]
+          ++ lib.optionals hasHardware [
             ./hosts/${hostName}/hardware-configuration.nix
-          ];
-        };
-    in
-    {
-      nixosConfigurations = {
-        nomad = mkHost { system = "x86_64-linux"; hostName = "nomad"; };
+          ]
+          ++ extraModules;
+      };
+  in
+  {
+    nixosConfigurations = {
+      # “Real” machine: enableDesktop = true
+      nomad = mkHost {
+        system = "x86_64-linux";
+        hostName = "nomad";
+        enableDesktop = true;
+      };
+
+      # WSL host: no hardware config, no desktop module
+      wsl = mkHost {
+        system = "x86_64-linux";
+        hostName = "wsl";
+        hasHardware = false;
+        enableDesktop = false;
+        extraModules = [
+          nixos-wsl.nixosModules.default
+        ];
       };
     };
+  };
 }

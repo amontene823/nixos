@@ -27,6 +27,9 @@
     turbocase
     easyeda2kicad
 
+    # Electronics
+    kingstvis
+
     # Editors
     emacs
     vscode
@@ -36,8 +39,8 @@
     cantarell-fonts
 
     # Gaming / emulation
-    retroarch-full
-    dolphin-emu
+    #retroarch-full
+    #dolphin-emu
 
   ];
 

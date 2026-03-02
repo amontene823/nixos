@@ -12,5 +12,6 @@
     ./git.nix
     ./bash.nix
     ./direnv.nix
+    ./latex.nix
   ];
 }
