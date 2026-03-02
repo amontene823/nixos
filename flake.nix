@@ -3,9 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }:
     let
       lib = nixpkgs.lib;
 
@@ -17,6 +22,14 @@
             ./modules/desktop-kde.nix
             ./modules/packages.nix
             ./modules/user-angelo.nix
+
+            # Home Manager (user environment)
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.angelo = import ./home/angelo;
+            }
 
             # Host-specific bits (hostname + hardware)
             ./hosts/${hostName}/configuration.nix

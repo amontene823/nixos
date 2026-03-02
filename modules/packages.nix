@@ -1,27 +1,16 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
+    # Editors/GUI you want system-wide (keep or move later)
     vim-full
-    wl-clipboard
-    wget
-    git
-    openssh
-    curl
-    htop
-    rclone
-    unzip
-
     vim
     emacs
     ispell
     vscode
-    gh
 
-    # python
-    python3
-    uv
-
+    # Device/tools / system-ish
+    openssh
     stm32cubemx
     stm32flash
 
@@ -32,7 +21,7 @@
     turbocase
     easyeda2kicad
 
-    # C/C++ build tools
+    # Build tools (either place; keeping system-wide is fine)
     gcc
     gnumake
     cmake
@@ -43,7 +32,7 @@
     retroarch-full
     dolphin-emu
 
-    # Utilities
+    # KDE/desktop utilities
     kdePackages.bluedevil
     maliit-keyboard
   ];
