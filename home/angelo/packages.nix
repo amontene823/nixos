@@ -32,7 +32,6 @@
 
     # Editors
     emacs
-    vscode
 
     # Fonts
     fira-code
