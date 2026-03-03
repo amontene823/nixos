@@ -37,6 +37,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit hostName;
+              };
               home-manager.users.angelo = import ./home/angelo;
             }
 

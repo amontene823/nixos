@@ -1,47 +1,57 @@
 { pkgs, ... }:
 
-{
-  # User-scoped pacckages
-  home.packages = with pkgs; [
-    # CLI tools
+let
+  cliTools = with pkgs; [
     rclone
     unzip
     tree
     ispell
     ripgrep
     fd
+  ];
 
-    # dev tools
+  devTools = with pkgs; [
     gh
     uv
     python3
+  ];
 
-    # STM32
+  stm32Tools = with pkgs; [
     stm32cubemx
     stm32flash
+  ];
 
-    # CAD
+  cadTools = with pkgs; [
     kicad
     openscad
     freecad
     turbocase
     easyeda2kicad
+  ];
 
-    # Electronics
+  electronicsTools = with pkgs; [
     kingstvis
+  ];
 
-    # Editors
+  editorTools = with pkgs; [
     emacs
+  ];
 
-    # Fonts
+  fontPackages = with pkgs; [
     fira-code
     cantarell-fonts
-
-    # Gaming / emulation
-    #retroarch-full
-    #dolphin-emu
-
   ];
+in
+{
+  # User-scoped packages.
+  home.packages =
+    cliTools
+    ++ devTools
+    ++ stm32Tools
+    ++ cadTools
+    ++ electronicsTools
+    ++ editorTools
+    ++ fontPackages;
 
 
   fonts.fontconfig.enable = true;

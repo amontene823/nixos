@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ hostName, ... }:
 
 {
   # Set this to match your system.stateVersion (check in /etc/nixos/hosts/nomad/configuration.nix).
@@ -13,5 +13,5 @@
     ./bash.nix
     ./direnv.nix
     ./latex.nix
-  ];
+  ] ++ (if hostName == "wsl" then [ ] else [ ./vscode.nix ]);
 }
